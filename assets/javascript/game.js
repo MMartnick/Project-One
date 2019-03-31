@@ -66,6 +66,7 @@ $(document).ready(function () {
 			name: "Kain",
 			health: 142,
 			strength: 12,
+			speed: 5000,
 			imageUrl: "assets/images/kainSml.png",
 			moveSet: {
 				attack: 12,
@@ -78,128 +79,128 @@ $(document).ready(function () {
 				defend: 0,
 			}
 		},
-
-		"Cloud": {
-			name: "Cloud",
-			health: 120,
-			attack: 16,
-			imageUrl: "assets/images/cloudSml.png",
-			moveSet: {
-				attack: 5,
-				heal: 21,
-				jump: 16,
-				skill: {
-					braver: 20,
-					crossSlash: 27
+		/*
+				"Cloud": {
+					name: "Cloud",
+					health: 120,
+					attack: 16,
+					imageUrl: "assets/images/cloudSml.png",
+					moveSet: {
+						attack: 5,
+						heal: 21,
+						jump: 16,
+						skill: {
+							braver: 20,
+							crossSlash: 27
+						},
+						defend: 0,
+					}
 				},
-				defend: 0,
-			}
-		},
 
-		"Ace": {
-			name: "Ace",
-			health: 120,
-			attack: 8,
-			imageUrl: "assets/images/aceSml.png",
-			enemyAttackBack: 15,
-			moveSet: {
-				attack: 18,
-				heal: 25,
-				jump: 16,
-				skill: {
-					lancet: 20,
-					tornado: 27
+				"Ace": {
+					name: "Ace",
+					health: 120,
+					attack: 8,
+					imageUrl: "assets/images/aceSml.png",
+					enemyAttackBack: 15,
+					moveSet: {
+						attack: 18,
+						heal: 25,
+						jump: 16,
+						skill: {
+							lancet: 20,
+							tornado: 27
+						},
+						defend: 0,
+					}
 				},
-				defend: 0,
-			}
-		},
 
-		"Golbez": {
-			name: "Golbez",
-			health: 120,
-			attack: 18,
-			imageUrl: "assets/images/golbezSml.png",
-			moveSet: {
-				attack: 18,
-				heal: 22,
-				jump: 16,
-				skill: {
-					lancet: 20,
-					tornado: 27
+				"Golbez": {
+					name: "Golbez",
+					health: 120,
+					attack: 18,
+					imageUrl: "assets/images/golbezSml.png",
+					moveSet: {
+						attack: 18,
+						heal: 22,
+						jump: 16,
+						skill: {
+							lancet: 20,
+							tornado: 27
+						},
+						defend: 0,
+					}
 				},
-				defend: 0,
-			}
-		},
 
-		"Locke": {
-			name: "Locke",
-			health: 142,
-			strength: 12,
-			imageUrl: "assets/images/lockeSml.png",
-			moveSet: {
-				attack: 12,
-				heal: 26,
-				jump: 16,
-				skill: {
-					lancet: 20,
-					tornado: 27
+				"Locke": {
+					name: "Locke",
+					health: 142,
+					strength: 12,
+					imageUrl: "assets/images/lockeSml.png",
+					moveSet: {
+						attack: 12,
+						heal: 26,
+						jump: 16,
+						skill: {
+							lancet: 20,
+							tornado: 27
+						},
+						defend: 0,
+					}
 				},
-				defend: 0,
-			}
-		},
 
-		"Vivi": {
-			name: "Vivi",
-			health: 120,
-			attack: 16,
-			imageUrl: "assets/images/viviSml.png",
-			moveSet: {
-				attack: 5,
-				heal: 21,
-				jump: 16,
-				skill: {
-					braver: 20,
-					crossSlash: 27
+				"Vivi": {
+					name: "Vivi",
+					health: 120,
+					attack: 16,
+					imageUrl: "assets/images/viviSml.png",
+					moveSet: {
+						attack: 5,
+						heal: 21,
+						jump: 16,
+						skill: {
+							braver: 20,
+							crossSlash: 27
+						},
+						defend: 0,
+					}
 				},
-				defend: 0,
-			}
-		},
 
-		"Lulu": {
-			name: "Lulu",
-			health: 140,
-			attack: 16,
-			imageUrl: "assets/images/luluSml.png",
-			enemyAttackBack: 15,
-			moveSet: {
-				attack: 18,
-				heal: 25,
-				jump: 16,
-				skill: {
-					lancet: 20,
-					tornado: 27
+				"Lulu": {
+					name: "Lulu",
+					health: 140,
+					attack: 16,
+					imageUrl: "assets/images/luluSml.png",
+					enemyAttackBack: 15,
+					moveSet: {
+						attack: 18,
+						heal: 25,
+						jump: 16,
+						skill: {
+							lancet: 20,
+							tornado: 27
+						},
+						defend: 0,
+					}
 				},
-				defend: 0,
-			}
-		},
 
-		"Wol": {
-			name: "Wol",
-			health: 130,
-			attack: 18,
-			imageUrl: "assets/images/wolSml.png",
-			moveSet: {
-				attack: 18,
-				heal: 22,
-				jump: 16,
-				skill: {
-					lancet: 20,
-					tornado: 27
+				"Wol": {
+					name: "Wol",
+					health: 130,
+					attack: 18,
+					imageUrl: "assets/images/wolSml.png",
+					moveSet: {
+						attack: 18,
+						heal: 22,
+						jump: 16,
+						skill: {
+							lancet: 20,
+							tornado: 27
+						},
+						defend: 0,
+					}
 				},
-				defend: 0,
-			}
-		},
-
+		*/
 	};
 
 	var enemyCharacters = {
@@ -331,9 +332,11 @@ $(document).ready(function () {
 	// renders character moveSet to the DOM
 	var renderMoveSet = function (character, renderArea) {
 
-		var attack1 = $("<button>");
+		var attack1 = $("<button>").click(function () {
+			cursor.play()
+		});
 		//class='combat-attack'  data-type='"+character+"'>");
-		attack1.addClass("combat-attack");
+		attack1.addClass("combat-attack")
 		attack1.attr("data-type", character);
 		attack1.text(character);
 		// variable for testing to see that the character data renders a distinct button
@@ -343,7 +346,9 @@ $(document).ready(function () {
 		$(renderArea).append(attack1);
 
 		// cure button render
-		var heal1 = $("<button>");
+		var heal1 = $("<button>").click(function () {
+			cursor.play()
+		});
 		heal1.addClass("combat-heal");
 		heal1.attr("data-heal", character);
 		heal1.text("Cure");
@@ -352,15 +357,17 @@ $(document).ready(function () {
 		console.log(healData);
 
 		$(renderArea).append(heal1);
-
 	};
+
 
 	// renders character info to the DOM
 	var renderInfo = function (character, renderArea) {
 		var charInfoMenu = $("<div class='char-info-menu' data-name='" + character.name + "'>");
 		var charNameMenu = $("<div class='character-name-menu'>").text(character.name);
+		var charHealthMenu = $("<div class='character-health-menu'>").text(character.health);
 		charInfoMenu.append(charNameMenu);
 		$(renderArea).append(charInfoMenu);
+		$(renderArea).append(charHealthMenu);
 	};
 
 
@@ -465,7 +472,7 @@ $(document).ready(function () {
 	// initiallizes the game
 	initializeGame();
 
-	
+
 
 	// function for selecting characters
 	$("#team-character-select").on("click", ".character", function () {
@@ -588,17 +595,31 @@ $(document).ready(function () {
 
 	// function to update player health
 	var clearHealth = function () {
-		var gameMessage = $(".character-name-menu");
+		var gameMessage = $(".character-health-menu");
 		gameMessage.text("");
 	};
 
-				//function to handle rendering game messages.
-				var renderHealth = function (message) {
-					// builds the message and appends it to the page 
-					var gameMessageSet = $(".character-health");
-					var newMessage = $("<div>").text(message);
-					gameMessageSet.append(newMessage);
-				};
+	//function to handle rendering game messages.
+	var renderHealth = function (message) {
+		// builds the message and appends it to the page 
+		var gameMessageSet = $(".character-health");
+		var newMessage = $("<div>").text(message);
+		gameMessageSet.append(newMessage);
+	};
+
+	// Hides moveset onclick
+	$(".moveset-container").on("click", function () {
+		$(this).hide();
+	});
+
+	// Shows battle menu based on character speed
+	function battleUpdate() {
+		$(".moveset-container").show();
+		setTimeout(battleUpdate, 5000);
+	}
+
+	battleUpdate()
+
 
 	// Cure button actions
 	$(".moveset-container").on("click", ".combat-heal", function () {
@@ -612,14 +633,15 @@ $(document).ready(function () {
 		// Increase your health by the characters heal value.
 		characters[playerName].health += characters[playerName].moveSet.heal;
 		var charHealth = $("<div class>").text(characters[playerName].health);
-		$(".character-name-menu").append(charHealth);
+		$(".character-health-menu").append(charHealth);
 		renderMessage(healMessage);
+
 
 		//clearMessage();
 	});
 
 	// when you click the attack button, run the following game logic
-	
+
 	$(".moveset-container").on("click", ".combat-attack", function () {
 		console.log(enemySelected.health);
 		clearHealth();
@@ -654,12 +676,12 @@ $(document).ready(function () {
 			console.log(characters[playerName].health);
 
 			var charHealth = $("<div class>").text(characters[playerName].health);
-			$(".character-name-menu").append(charHealth);
+			$(".character-health-menu").append(charHealth);
 
 
 			var enemyHealth = $("<div class='enemy-health'>").text(enemySelected.health);
 			$(".enemy-name-menu").append(enemyHealth);
-			
+
 
 			// For an ongoing string of enemies, future use
 			/*if (killCount < enemyCharacters.length && enemySelected.health <= 0) {
@@ -684,7 +706,7 @@ $(document).ready(function () {
 				});
 			}
 
-			
+
 
 		} else {
 			// if the enemy has less than zero health they are defeated

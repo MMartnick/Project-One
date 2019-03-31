@@ -13,10 +13,10 @@ body {
 }
 
 .container {
-	height: 90%;
-	width: 80%;
+	height: 90vh;
+	width: 80vw;
 	margin: auto;
-	margin-top: .5%;
+	margin-top: 2vh;
 }
 
 nav {
@@ -220,49 +220,67 @@ input {
 }
 
 #combat-menu {
-	width: 90%;
-	height: 30%;
-	margin: auto;
-	margin-top: 31%;
-	border-radius: 10px;
-	background-color: rgba(15, 96, 189, 0.699);
-	border: 5px solid rgb(216, 216, 216);
+    width: 78vw;
+    height: 27vh;
+    margin: auto;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    /* margin-bottom: 2vh; */
+    border-radius: 10px;
+    background-color: rgba(15, 96, 189, 0.699);
+    border: 5px solid rgb(216, 216, 216);
+    display: inline-flex;
+    text-align: center;
 }
 
 .character-menu {
-	width: 25%;
-	height: 80%;
-	margin: auto;
-	margin-top: -18%;
-	margin-left: 50%;
-	float: right;
-	padding-top: 1%;
-	padding-bottom: 1%;
+	height: 9vh;
+    width: 12vw;
+    padding-right: 14vw;
+    border: 6px solid green;
+    padding-top: 0vh;
+	padding-bottom: 1vh;
+	display: inline-block ;
+}
+
+.char-info-menu {
+	height: 3vh;
+    width: 12vw;
+	border: 6px solid red;
+	text-align: center;
 }
 
 .enemy-menu {
-	width: 25%;
-	height: 80%;
-	margin: auto;
-	margin-top: -18%;
-	margin-left: 10%;
-	float: left;
-	padding-top: 1%;
-	padding-bottom: 1%;
+    width: 31vw;
+    height: 24vh;
+    border: 6px solid green;
+    /* padding-top: 0vh; */
+	/* padding-bottom: 1vh;*/
+	display: inline-block ;
 }
 
 .moveset-container {
-	width: 13%;
-	height: 80%;
-	margin: auto;
-	margin-top: .5%;
-	margin-left: 57%;
-	padding-top: 1%;
-	padding-bottom: 1%;
-	border-radius: 10px;
-	background-color: rgba(15, 96, 189, 0.699);
-	border: 5px solid rgb(216, 216, 216);
+	width: 11vw;
+    height: 23vh;
+    margin: auto;
+    margin-top: -1.5vh;
+    padding-top: -2%;
+    padding-bottom: 5vh;
+    border-radius: 7%;
+    background-color: rgba(15, 96, 189, 0.699);
+    border: 5px solid rgb(216, 216, 216);
 	color: rgb(216, 216, 216);
+	display: inline-block ;
+}
+
+.moveset-box {
+	width: 11vw;
+    height: 23vh;
+    margin: auto;
+    margin-top: -1.5vh;
+    padding-top: -2%;
+    padding-bottom: 5vh;
+	display: inline-block ;
 }
 
 #game-message {
@@ -323,7 +341,7 @@ input {
 
 @media screen and (max-width: 992px) {
 	.container {
-		height: 90%;
+		height: 80%;
 		width: 80%;
 		margin: auto;
 		margin-top: .5%;
@@ -523,14 +541,16 @@ input {
 		padding-bottom: 1%;
 	}
 	.enemy-menu {
-		width: 25%;
-		height: 20%;
-		margin: auto;
-		margin-top: -20%;
-		margin-left: 10%;
-		float: left;
-		padding-top: 1%;
-		padding-bottom: 1%;
+		width: 29vw;
+		height: 24vh;
+		/* margin: auto; */
+		/* margin-top: -27vh; */
+		/* margin-right: -44vw; */
+		padding-right: 14vw;
+		/* float: left; */
+		border: 6px solid green;
+		/* padding-top: 0vh; */
+		/* padding-bottom: 1vh; */
 	}
 
 	.enemy-name-menu {
@@ -764,10 +784,10 @@ input {
 	}
 	#enemy-section {
 		float: left;
-		width: 28%;
-		height: 32%;
-		margin-top: 22%;
-		margin-left: 21%;
+		width: 28vw;
+		height: 23vh;
+		margin-top: 13vh;
+		margin-left: 14vw;
 	}
 	.enemy-characters {
 		height: 20%;
@@ -793,14 +813,14 @@ input {
 		padding-bottom: 1%;
 	}
 	.enemy-menu {
-		width: 25%;
-		height: 80%;
+		width: 10vw;
+		height: 15vh;
 		margin: auto;
-		margin-top: -30%;
-		margin-left: 10%;
+		margin-top: -20vh;
+		margin-left: 10vw;
 		float: left;
-		padding-top: 1%;
-		padding-bottom: 1%;
+		padding-top: 1vh;
+		padding-bottom: 1vh;
 	}
 	.moveset-container {
 		width: 23%;
