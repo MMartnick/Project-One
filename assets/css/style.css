@@ -532,6 +532,10 @@ input {
 		padding-top: 1%;
 		padding-bottom: 1%;
 	}
+
+	.enemy-name-menu {
+		padding: 3%;
+	}
 	.moveset-container {
 		width: 17%;
 		height: 80%;

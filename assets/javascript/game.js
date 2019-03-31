@@ -240,18 +240,18 @@ $(document).ready(function () {
 		},
 
 
-		"kefka": { // Pittsburg
+		"kefka": { // Pittsburgh
 			name: "Kefka",
 			health: 400,
 			attack: 35,
-			imageUrl: "assets/images/diablo.gif",
+			imageUrl: "assets/images/kefka.png",
 		},
 
 
 
 	};
 
-	// Variables for audio -------------------------------------
+	// Variables for audio ------------------------------------
 	var error = new Audio("assets/audio/error.mp3");
 	var intro = new Audio("assets/audio/intro.mp3");
 	var growl = new Audio("assets/audio/growl.mp3");
@@ -330,6 +330,7 @@ $(document).ready(function () {
 
 	// renders character moveSet to the DOM
 	var renderMoveSet = function (character, renderArea) {
+
 		var attack1 = $("<button>");
 		//class='combat-attack'  data-type='"+character+"'>");
 		attack1.addClass("combat-attack");
@@ -362,6 +363,7 @@ $(document).ready(function () {
 		$(renderArea).append(charInfoMenu);
 	};
 
+
 	// updates selected character
 	function updateCharacter(charObj, areaRender) {
 		// $(areaRender).empty();
@@ -371,7 +373,6 @@ $(document).ready(function () {
 	};
 
 	var getEnemy = function (latitude, longitude) {
-
 
 		if ((latitude == 60.295502) && (longitude == -97.7417479)) {
 			renderEnemy(enemyCharacters.spiderhouse, "#enemy-section");
@@ -388,7 +389,7 @@ $(document).ready(function () {
 			renderInfo(enemyCharacters.ultimecia, ".enemy-menu");
 			currentEnemy = enemyCharacters.ultimecia;
 
-		} else if ((latitude == 40) && (longitude == -80)) {
+		} else if ((latitude == 40.367749) && (longitude == -80.032382)) {
 			renderEnemy(enemyCharacters.kefka, "#enemy-section");
 			renderInfo(enemyCharacters.kefka, ".enemy-menu");
 			currentEnemy = enemyCharacters.kefka;
@@ -433,7 +434,9 @@ $(document).ready(function () {
 	// function to clear the game message action
 	var clearMessage = function () {
 		var gameMessage = $("#game-message");
-		gameMessage.text("");
+		setTimeout(function () {
+			x.value = gameMessage.text("");
+		}, 3000);
 	};
 
 	var initializeGame = function () {
@@ -448,6 +451,7 @@ $(document).ready(function () {
 
 			console.log(enemySelected);
 			console.log(enemySelected.health);
+
 			// Loop through the characters object and call the renderCharacter function on each character to render their card
 			for (var key in characters) {
 				//renderInfo(characters[key], ".character-menu");
@@ -460,6 +464,8 @@ $(document).ready(function () {
 
 	// initiallizes the game
 	initializeGame();
+
+	
 
 	// function for selecting characters
 	$("#team-character-select").on("click", ".character", function () {
@@ -580,13 +586,40 @@ $(document).ready(function () {
 	//----------End Frame Transitions-----------------------------------------
 
 
-	// function to clear the game message action
+	// function to update player health
 	var clearHealth = function () {
 		var gameMessage = $(".character-name-menu");
 		gameMessage.text("");
 	};
 
+				//function to handle rendering game messages.
+				var renderHealth = function (message) {
+					// builds the message and appends it to the page 
+					var gameMessageSet = $(".character-health");
+					var newMessage = $("<div>").text(message);
+					gameMessageSet.append(newMessage);
+				};
+
+	// Cure button actions
+	$(".moveset-container").on("click", ".combat-heal", function () {
+		var playerName = $(this).attr("data-heal");
+		console.log(playerName, "Yo");
+		// creates messages for our attack and our opponents counter attack
+		var healMessage = characters[playerName].name + " gained " + characters[playerName].moveSet.heal + " HP.";
+		clearMessage();
+		var healUp = characters[playerName].moveSet.heal + characters[playerName].health;
+		console.log(healUp);
+		// Increase your health by the characters heal value.
+		characters[playerName].health += characters[playerName].moveSet.heal;
+		var charHealth = $("<div class>").text(characters[playerName].health);
+		$(".character-name-menu").append(charHealth);
+		renderMessage(healMessage);
+
+		//clearMessage();
+	});
+
 	// when you click the attack button, run the following game logic
+	
 	$(".moveset-container").on("click", ".combat-attack", function () {
 		console.log(enemySelected.health);
 		clearHealth();
@@ -595,6 +628,7 @@ $(document).ready(function () {
 
 		var playerName = $(this).attr("data-type");
 		console.log(playerName, "Yo");
+
 		// creates messages for our attack and our opponents counter attack
 		var attackMessage = characters[playerName].name + " hit " + enemySelected.name + " for " + characters[playerName].moveSet.attack + " damage.";
 		var counterAttackMessage = enemySelected.name + " did " + enemyAttackLevel + " damage.";
@@ -603,7 +637,7 @@ $(document).ready(function () {
 
 		// Reduce defender's health by your attack value.
 
-		// If the enemey st has health
+		// If the enemey still has health
 		if (enemySelected.health > 0) {
 			// Render the enemy's updated character card.
 			// updateCharacter(defender, "#defender");
@@ -622,17 +656,10 @@ $(document).ready(function () {
 			var charHealth = $("<div class>").text(characters[playerName].health);
 			$(".character-name-menu").append(charHealth);
 
-			//function to handle rendering game messages.
-			var renderHealth = function (message) {
-				// builds the message and appends it to the page 
-				var gameMessageSet = $(".character-health");
-				var newMessage = $("<div>").text(message);
-				gameMessageSet.append(newMessage);
-			};
-
-
 
 			var enemyHealth = $("<div class='enemy-health'>").text(enemySelected.health);
+			$(".enemy-name-menu").append(enemyHealth);
+			
 
 			// For an ongoing string of enemies, future use
 			/*if (killCount < enemyCharacters.length && enemySelected.health <= 0) {
@@ -656,6 +683,9 @@ $(document).ready(function () {
 					location.reload();
 				});
 			}
+
+			
+
 		} else {
 			// if the enemy has less than zero health they are defeated
 			// remove your opponents character card. 
@@ -684,18 +714,6 @@ $(document).ready(function () {
 
 		//clearMessage();
 
-	});
-
-
-	// Cure button actions
-	$(".moveset-container").on("click", ".combat-heal", function () {
-		var playerName = $(this).attr("data-heal");
-		console.log(playerName, "Yo");
-		// creates messages for our attack and our opponents counter attack
-		var attackMessage = characters[playerName].name + "gained" + characters[playerName].moveSet.heal + " HP.";
-		var healUp = characters[playerName].moveSet.heal + characters[playerName].health;
-		console.log(healUp);
-		//clearMessage();
 	});
 
 
