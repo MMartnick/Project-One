@@ -260,6 +260,7 @@ $(document).ready(function () {
 	var growl = new Audio("assets/audio/growl.mp3");
 	var cursor = new Audio("assets/audio/cursor.mp3");
 	var battle1 = new Audio("assets/audio/battle1.mp3");
+	var boss1 = new Audio("assets/audio/boss1.mp3");
 	var fanfare = new Audio("assets/audio/fanfare.mp3");
 
 
@@ -275,7 +276,8 @@ $(document).ready(function () {
 	var currentEnemy;
 	var temperature;
 	var charHealth;
-
+	var battleMusic;
+	var isBoss = false;
 
 	//var combatTimer = setInterval(timer, speed);
 	//var currentChar = charObj;
@@ -377,7 +379,6 @@ $(document).ready(function () {
 		$(renderArea).append(charMaxHealthMenu);
 	};
 
-
 	// updates selected character
 	function updateCharacter(charObj, areaRender) {
 		// $(areaRender).empty();
@@ -403,10 +404,12 @@ $(document).ready(function () {
 			renderInfo(enemyCharacters.ultimecia, ".enemy-menu");
 			currentEnemy = enemyCharacters.ultimecia;
 
-		} else if ((latitude == 40.367749) && (longitude == -80.032382)) {
+		} else if ((latitude == 41) && (longitude == -80)) {
 			renderEnemy(enemyCharacters.kefka, "#enemy-section");
 			renderInfo(enemyCharacters.kefka, ".enemy-menu");
 			currentEnemy = enemyCharacters.kefka;
+			isBoss = true;
+			battleMusic = boss1;
 
 		} else if ((latitude == 41) && (longitude == -74)) {
 			renderEnemy(enemyCharacters.dragon, "#enemy-section");
@@ -417,6 +420,8 @@ $(document).ready(function () {
 			renderEnemy(enemyCharacters.knight, "#enemy-section");
 			renderInfo(enemyCharacters.knight, ".enemy-menu");
 			currentEnemy = enemyCharacters.knight;
+			
+			battleMusic = battle1;
 		}
 
 		return currentEnemy;
@@ -425,10 +430,10 @@ $(document).ready(function () {
 
 	var background = function (temperature) {
 
-		if (temperature >= 299) {
+		if (temperature >= 294) {
 			document.getElementById("combat-arena").style.backgroundImage = "url(assets/images/desert.png)";
 
-		} else if (temperature <= 275) {
+		} else if  (temperature <= 275) {
 			document.getElementById("combat-arena").style.backgroundImage = "url(assets/images/snow.png)";
 
 		} else {
@@ -570,6 +575,21 @@ $(document).ready(function () {
 		if (selectToggle) {
 			selectToggle.appendTo("body");
 			selectToggle = null;
+
+		} 
+		
+		else if  (currentEnemy = enemyCharacters.kefka){
+			selectToggle = $("#character-select-screen").detach();
+			$("#combat-arena").show("slow");
+			var kay = document.getElementById("combat-arena").style.backgroundImage;
+			console.log(kay);
+			background(temperature);
+
+			$(".character-name").hide();
+			intro.pause();
+			growl.play();
+			battleMusic.play();
+
 		} else {
 			selectToggle = $("#character-select-screen").detach();
 			$("#combat-arena").show("slow");
@@ -580,7 +600,7 @@ $(document).ready(function () {
 			$(".character-name").hide();
 			intro.pause();
 			growl.play();
-			battle1.play();
+			battleMusic.play();
 
 		}
 	});
@@ -712,7 +732,7 @@ $(document).ready(function () {
 
 			(enemySelected.health <= 0)
 			var gameStateMessage = " You have defeated " + enemySelected.name;
-			battle1.pause();
+			battleMusic.pause();
 			fanfare.play();
 			renderMessage(gameStateMessage);
 			$(".combat-attack").off("click");
