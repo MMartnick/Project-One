@@ -250,6 +250,16 @@ input {
 	text-align: center;
 }
 
+.character-health-menu {
+	padding: 3%;
+	display: inline-flex;
+}
+
+.character-maxHealth-menu {
+	padding: 3%;
+	display: inline-flex;
+}
+
 .enemy-menu {
     width: 31vw;
     height: 24vh;
@@ -308,10 +318,16 @@ input {
 
 .combat-heal {
 	width: 100%;
+	border: none;
+	margin: none;
+	background-color: rgba(15, 96, 189, 0.699);
 }
 
 .combat-attack {
 	width: 100%;
+	border: none;
+	margin: none;
+	background-color: rgba(15, 96, 189, 0.699);
 }
 
 .reset {

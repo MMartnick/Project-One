@@ -65,16 +65,18 @@ $(document).ready(function () {
 		"Kain": {
 			name: "Kain",
 			health: 142,
+			maxHealth: 142,
 			strength: 12,
 			speed: 5000,
-			imageUrl: "assets/images/kainSml.png",
+			imageUrl: "assets/images/kain/kainSml.png",
+			imageAtk: "assets/images/kain/kainAtk.png",
 			moveSet: {
 				attack: 12,
 				heal: 26,
 				jump: 16,
 				skill: {
-					lancet: 20,
-					tornado: 27
+					name: "Lance",
+					attack: 20
 				},
 				defend: 0,
 			}
@@ -206,7 +208,7 @@ $(document).ready(function () {
 	var enemyCharacters = {
 		"knight": {
 			name: "Knight",
-			health: 173,
+			health: 30,
 			attack: 13,
 			imageUrl: "assets/images/knight.gif",
 		},
@@ -258,6 +260,7 @@ $(document).ready(function () {
 	var growl = new Audio("assets/audio/growl.mp3");
 	var cursor = new Audio("assets/audio/cursor.mp3");
 	var battle1 = new Audio("assets/audio/battle1.mp3");
+	var fanfare = new Audio("assets/audio/fanfare.mp3");
 
 
 	// will be populated when player selects a character team
@@ -305,13 +308,13 @@ $(document).ready(function () {
 	$("#char-select").hide();
 	$(".reset").hide();
 
-
 	// renders all characters to the DOM
 	var renderCharacter = function (character, renderArea) {
 		// this block of code builds the character card, and renders it to the page.
 		var charDiv = $("<div class='character' data-name='" + character.name + "'>");
 		var charName = $("<div class='character-name'>").text(character.name);
 		var charImage = $("<img alt='image' class='character-image'>").attr("src", character.imageUrl);
+
 		//var charHealth = $("<div class='character-health'>").text(character.health);
 		charDiv.append(charName).append(charImage); //.append(charHealth);
 		$(renderArea).append(charDiv);
@@ -338,7 +341,8 @@ $(document).ready(function () {
 		//class='combat-attack'  data-type='"+character+"'>");
 		attack1.addClass("combat-attack")
 		attack1.attr("data-type", character);
-		attack1.text(character);
+		attack1.text("Attack");
+
 		// variable for testing to see that the character data renders a distinct button
 		var attackData = attack1.attr("data-type");
 		console.log(attackData);
@@ -357,6 +361,7 @@ $(document).ready(function () {
 		console.log(healData);
 
 		$(renderArea).append(heal1);
+
 	};
 
 
@@ -365,9 +370,11 @@ $(document).ready(function () {
 		var charInfoMenu = $("<div class='char-info-menu' data-name='" + character.name + "'>");
 		var charNameMenu = $("<div class='character-name-menu'>").text(character.name);
 		var charHealthMenu = $("<div class='character-health-menu'>").text(character.health);
+		var charMaxHealthMenu = $("<div class='character-maxHealth-menu'>").text(" / " + character.maxHealth);
 		charInfoMenu.append(charNameMenu);
 		$(renderArea).append(charInfoMenu);
 		$(renderArea).append(charHealthMenu);
+		$(renderArea).append(charMaxHealthMenu);
 	};
 
 
@@ -592,20 +599,31 @@ $(document).ready(function () {
 
 	//----------End Frame Transitions-----------------------------------------
 
+	// Cure button actions
+	$(".moveset-container").on("click", ".combat-heal", function () {
+		var playerName = $(this).attr("data-heal");
+		console.log(playerName, "Yo");
+		// creates messages for our attack and our opponents counter attack
+		var healMessage = characters[playerName].name + " gained " + characters[playerName].moveSet.heal + " HP.";
+		clearMessage();
+		var healUp = characters[playerName].moveSet.heal + characters[playerName].health;
+		console.log(healUp);
+		// Increase your health by the characters heal value.
+		clearHealth();
+		characters[playerName].health += characters[playerName].moveSet.heal;
+		var charHealth = $("<div class>").text(characters[playerName].health);
+		$(".character-health-menu").append(charHealth);
+		clearMessage(gameMessage);
+		renderMessage(healMessage);
+
+		//clearMessage();
+	});
 
 	// function to update player health
 	var clearHealth = function () {
 		var gameMessage = $(".character-health-menu");
 		gameMessage.text("");
-	};
-
-	//function to handle rendering game messages.
-	var renderHealth = function (message) {
-		// builds the message and appends it to the page 
-		var gameMessageSet = $(".character-health");
-		var newMessage = $("<div>").text(message);
-		gameMessageSet.append(newMessage);
-	};
+	}; 
 
 	// Hides moveset onclick
 	$(".moveset-container").on("click", function () {
@@ -619,26 +637,6 @@ $(document).ready(function () {
 	}
 
 	battleUpdate()
-
-
-	// Cure button actions
-	$(".moveset-container").on("click", ".combat-heal", function () {
-		var playerName = $(this).attr("data-heal");
-		console.log(playerName, "Yo");
-		// creates messages for our attack and our opponents counter attack
-		var healMessage = characters[playerName].name + " gained " + characters[playerName].moveSet.heal + " HP.";
-		clearMessage();
-		var healUp = characters[playerName].moveSet.heal + characters[playerName].health;
-		console.log(healUp);
-		// Increase your health by the characters heal value.
-		characters[playerName].health += characters[playerName].moveSet.heal;
-		var charHealth = $("<div class>").text(characters[playerName].health);
-		$(".character-health-menu").append(charHealth);
-		renderMessage(healMessage);
-
-
-		//clearMessage();
-	});
 
 	// when you click the attack button, run the following game logic
 
@@ -670,7 +668,7 @@ $(document).ready(function () {
 			renderMessage(attackMessage);
 			renderMessage(counterAttackMessage);
 
-			// Reduce your attack health by the opponents attack value.
+			// Reduce your character health by the opponents attack value.
 			characters[playerName].health -= enemyAttackLevel;
 			console.log(characters[playerName]);
 			console.log(characters[playerName].health);
@@ -714,12 +712,15 @@ $(document).ready(function () {
 
 			(enemySelected.health <= 0)
 			var gameStateMessage = " You have defeated " + enemySelected.name;
+			battle1.pause();
+			fanfare.play();
 			renderMessage(gameStateMessage);
 			$(".combat-attack").off("click");
 
 
 			$(".reset").show().on("click", function () {
 				location.reload();
+				fanfare.pause();
 			});
 
 			// Increment your kill count
