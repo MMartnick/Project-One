@@ -208,7 +208,7 @@ $(document).ready(function () {
 	var enemyCharacters = {
 		"knight": {
 			name: "Knight",
-			health: 30,
+			health: 8,
 			attack: 13,
 			imageUrl: "assets/images/knight.gif",
 		},
@@ -262,6 +262,7 @@ $(document).ready(function () {
 	var battle1 = new Audio("assets/audio/battle1.mp3");
 	var boss1 = new Audio("assets/audio/boss1.mp3");
 	var fanfare = new Audio("assets/audio/fanfare.mp3");
+	var enemyDeath = new Audio("assets/audio/enemyDeath.mp3");
 
 
 	// will be populated when player selects a character team
@@ -277,7 +278,7 @@ $(document).ready(function () {
 	var temperature;
 	var charHealth;
 	var battleMusic;
-	var isBoss = false;
+	var isBoss;
 
 	//var combatTimer = setInterval(timer, speed);
 	//var currentChar = charObj;
@@ -286,11 +287,17 @@ $(document).ready(function () {
 
 	// Audio loops --------------------------------------------
 
-	battle1.addEventListener('ended', function () {
+	if (isBoss = true) {
+		battleMusic = boss1;
+	} else {
+		battleMusic = battle1;
+	}
+
+	battleMusic.addEventListener('ended', function () {
 		this.currentTime = 0;
 		this.play();
 	}, false);
-	battle1.play();
+	battleMusic.play();
 
 	intro.addEventListener('ended', function () {
 		this.currentTime = 0;
@@ -341,7 +348,7 @@ $(document).ready(function () {
 			cursor.play()
 		});
 		//class='combat-attack'  data-type='"+character+"'>");
-		attack1.addClass("combat-attack")
+		attack1.addClass("combat-attack");
 		attack1.attr("data-type", character);
 		attack1.text("Attack");
 
@@ -409,7 +416,7 @@ $(document).ready(function () {
 			renderInfo(enemyCharacters.kefka, ".enemy-menu");
 			currentEnemy = enemyCharacters.kefka;
 			isBoss = true;
-			battleMusic = boss1;
+
 
 		} else if ((latitude == 41) && (longitude == -74)) {
 			renderEnemy(enemyCharacters.dragon, "#enemy-section");
@@ -420,7 +427,7 @@ $(document).ready(function () {
 			renderEnemy(enemyCharacters.knight, "#enemy-section");
 			renderInfo(enemyCharacters.knight, ".enemy-menu");
 			currentEnemy = enemyCharacters.knight;
-			
+
 			battleMusic = battle1;
 		}
 
@@ -433,7 +440,7 @@ $(document).ready(function () {
 		if (temperature >= 294) {
 			document.getElementById("combat-arena").style.backgroundImage = "url(assets/images/desert.png)";
 
-		} else if  (temperature <= 275) {
+		} else if (temperature <= 275) {
 			document.getElementById("combat-arena").style.backgroundImage = "url(assets/images/snow.png)";
 
 		} else {
@@ -576,9 +583,7 @@ $(document).ready(function () {
 			selectToggle.appendTo("body");
 			selectToggle = null;
 
-		} 
-		
-		else if  (currentEnemy = enemyCharacters.kefka){
+		} else if (currentEnemy = enemyCharacters.kefka) {
 			selectToggle = $("#character-select-screen").detach();
 			$("#combat-arena").show("slow");
 			var kay = document.getElementById("combat-arena").style.backgroundImage;
@@ -643,7 +648,7 @@ $(document).ready(function () {
 	var clearHealth = function () {
 		var gameMessage = $(".character-health-menu");
 		gameMessage.text("");
-	}; 
+	};
 
 	// Hides moveset onclick
 	$(".moveset-container").on("click", function () {
@@ -731,17 +736,21 @@ $(document).ready(function () {
 			// remove your opponents character card. 
 
 			(enemySelected.health <= 0)
-			var gameStateMessage = " You have defeated " + enemySelected.name;
-			battleMusic.pause();
-			fanfare.play();
-			renderMessage(gameStateMessage);
-			$(".combat-attack").off("click");
+			enemyDeath.play();
+			$("#enemy-section").hide("slow");
 
+			setTimeout(function () {
+				var gameStateMessage = " You have defeated " + enemySelected.name;
+				battleMusic.pause();
+				fanfare.play();
+				renderMessage(gameStateMessage);
+				$(".combat-attack").off("click");
 
-			$(".reset").show().on("click", function () {
-				location.reload();
-				fanfare.pause();
-			});
+				$(".reset").show().on("click", function () {
+					location.reload();
+					fanfare.pause();
+				});
+			}, 2500);
 
 			// Increment your kill count
 			killCount++;
@@ -754,6 +763,8 @@ $(document).ready(function () {
 
 			}
 		}
+
+
 
 		//clearMessage();
 
