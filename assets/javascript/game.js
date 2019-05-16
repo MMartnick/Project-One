@@ -327,10 +327,6 @@ $(document).ready(function () {
 		//var charHealth = $("<div class='character-health'>").text(character.health);
 		charDiv.append(charName).append(charImage); //.append(charHealth);
 		$(renderArea).append(charDiv);
-
-		$("<button>").click(function () {
-			$(charDiv).animate({ left: '250px' });
-		}); 
 	};
 
 
@@ -392,6 +388,11 @@ $(document).ready(function () {
 			console.log(pos);
 		}
 	)};
+
+			$("<button>").click(function () {
+			$(charDiv).animate({ left: '250px' });
+		}); 
+
 */
 
 
