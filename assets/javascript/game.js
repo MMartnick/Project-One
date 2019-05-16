@@ -81,7 +81,7 @@ $(document).ready(function () {
 				defend: 0,
 			}
 		},
-		/*
+		
 				"Cloud": {
 					name: "Cloud",
 					health: 120,
@@ -202,7 +202,7 @@ $(document).ready(function () {
 						defend: 0,
 					}
 				},
-		*/
+		
 	};
 
 	var enemyCharacters = {
@@ -245,7 +245,7 @@ $(document).ready(function () {
 
 		"kefka": { // Pittsburgh
 			name: "Kefka",
-			health: 400,
+			health: 40,
 			attack: 35,
 			imageUrl: "assets/images/kefka.png",
 		},
@@ -327,6 +327,10 @@ $(document).ready(function () {
 		//var charHealth = $("<div class='character-health'>").text(character.health);
 		charDiv.append(charName).append(charImage); //.append(charHealth);
 		$(renderArea).append(charDiv);
+
+		$("<button>").click(function () {
+			$(charDiv).animate({ left: '250px' });
+		}); 
 	};
 
 
@@ -338,19 +342,21 @@ $(document).ready(function () {
 		var charImage = $("<img alt='image' class='character-image'>").attr("src", character.imageUrl);
 		charDiv /*.append(charName)*/ .append(charImage); //.append(charHealth);
 		$(renderArea).append(charDiv);
+		
 	};
-
 
 	// renders character moveSet to the DOM
 	var renderMoveSet = function (character, renderArea) {
-
 		var attack1 = $("<button>").click(function () {
 			cursor.play()
+
+
 		});
 		//class='combat-attack'  data-type='"+character+"'>");
 		attack1.addClass("combat-attack");
 		attack1.attr("data-type", character);
 		attack1.text("Attack");
+
 
 		// variable for testing to see that the character data renders a distinct button
 		var attackData = attack1.attr("data-type");
@@ -371,7 +377,49 @@ $(document).ready(function () {
 
 		$(renderArea).append(heal1);
 
+/*
+		(attack1).click(function () {
+			setInterval(anim, 10);
+			function anim() {
+
+				var pos = 0;
+				console.log(pos);
+				var elem =  $("<img alt='image' class='character-image'>").attr("src", character.imageUrl);
+			pos + 80;
+			elem.style.left = pos + 'px'; 
+			}
+			//clearInterval(id);
+			console.log(pos);
+		}
+	)};
+*/
+
+
+
+		};
+
+	// New ability system -------------------------------------------------------------------------
+/*
+	function Skill(strength, name) {
+		this.strength = strength;
+		this.name = name;
+	}
+
+	Skill.prototype.createBtn = function (parent) {
+		var btn = document.createElement('button');
+		input.id = this.name;
+		input.addEventListener ? input.addEventListener('click', this.getPrice.bind(this), false) :
+			input.attachEvent('onclick', this.getPrice.bind(this));
+		parent.appendChild(input);
 	};
+	// instantiate & append to body
+	var attack = new Skill(12, "Attack");
+	var poison = new Skill(12, "Poison");
+	x.createBtn(document.body);
+
+	var btn = document.createElement("BUTTON");   
+	btn.innerHTML = "CLICK ME";      */
+	// ============================================================================================
 
 
 	// renders character info to the DOM
