@@ -79,130 +79,168 @@ $(document).ready(function () {
 					attack: 20
 				},
 				defend: 0,
-			}
+			},
+			locked: false,
 		},
-		
-				"Cloud": {
-					name: "Cloud",
-					health: 120,
-					attack: 16,
-					imageUrl: "assets/images/cloudSml.png",
-					moveSet: {
-						attack: 5,
-						heal: 21,
-						jump: 16,
-						skill: {
-							braver: 20,
-							crossSlash: 27
-						},
-						defend: 0,
-					}
-				},
 
-				"Ace": {
-					name: "Ace",
-					health: 120,
-					attack: 8,
-					imageUrl: "assets/images/aceSml.png",
-					enemyAttackBack: 15,
-					moveSet: {
-						attack: 18,
-						heal: 25,
-						jump: 16,
-						skill: {
-							lancet: 20,
-							tornado: 27
-						},
-						defend: 0,
-					}
+		"Cloud": {
+			name: "Cloud",
+			health: 120,
+			attack: 16,
+			imageUrl: "assets/images/cloudSml.png",
+			moveSet: {
+				attack: 5,
+				heal: 21,
+				jump: 16,
+				skill: {
+					braver: 20,
+					crossSlash: 27
 				},
+				defend: 0,
+			},
+			locked: false,
+		},
 
-				"Golbez": {
-					name: "Golbez",
-					health: 120,
-					attack: 18,
-					imageUrl: "assets/images/golbezSml.png",
-					moveSet: {
-						attack: 18,
-						heal: 22,
-						jump: 16,
-						skill: {
-							lancet: 20,
-							tornado: 27
-						},
-						defend: 0,
-					}
+		"Ace": {
+			name: "Ace",
+			health: 120,
+			attack: 8,
+			imageUrl: "assets/images/aceSml.png",
+			enemyAttackBack: 15,
+			moveSet: {
+				attack: 18,
+				heal: 25,
+				jump: 16,
+				skill: {
+					lancet: 20,
+					tornado: 27
 				},
+				defend: 0,
+			},
+			locked: false,
+		},
 
-				"Locke": {
-					name: "Locke",
-					health: 142,
-					strength: 12,
-					imageUrl: "assets/images/lockeSml.png",
-					moveSet: {
-						attack: 12,
-						heal: 26,
-						jump: 16,
-						skill: {
-							lancet: 20,
-							tornado: 27
-						},
-						defend: 0,
-					}
+		"Golbez": {
+			name: "Golbez",
+			health: 120,
+			attack: 18,
+			imageUrl: "assets/images/golbezSml.png",
+			moveSet: {
+				attack: 18,
+				heal: 22,
+				jump: 16,
+				skill: {
+					lancet: 20,
+					tornado: 27
 				},
+				defend: 0,
+			},
+			locked: false,
+		},
 
-				"Vivi": {
-					name: "Vivi",
-					health: 120,
-					attack: 16,
-					imageUrl: "assets/images/viviSml.png",
-					moveSet: {
-						attack: 5,
-						heal: 21,
-						jump: 16,
-						skill: {
-							braver: 20,
-							crossSlash: 27
-						},
-						defend: 0,
-					}
+		"Locke": {
+			name: "Locke",
+			health: 142,
+			strength: 12,
+			imageUrl: "assets/images/lockeSml.png",
+			moveSet: {
+				attack: 12,
+				heal: 26,
+				jump: 16,
+				skill: {
+					lancet: 20,
+					tornado: 27
 				},
+				defend: 0,
+			},
+			locked: false,
+		},
 
-				"Lulu": {
-					name: "Lulu",
-					health: 140,
-					attack: 16,
-					imageUrl: "assets/images/luluSml.png",
-					enemyAttackBack: 15,
-					moveSet: {
-						attack: 18,
-						heal: 25,
-						jump: 16,
-						skill: {
-							lancet: 20,
-							tornado: 27
-						},
-						defend: 0,
-					}
+		"Vivi": {
+			name: "Vivi",
+			health: 120,
+			attack: 16,
+			imageUrl: "assets/images/viviSml.png",
+			moveSet: {
+				attack: 5,
+				heal: 21,
+				jump: 16,
+				skill: {
+					braver: 20,
+					crossSlash: 27
 				},
+				defend: 0,
+			},
+			locked: false,
+		},
 
-				"Wol": {
-					name: "Wol",
-					health: 130,
-					attack: 18,
-					imageUrl: "assets/images/wolSml.png",
-					moveSet: {
-						attack: 18,
-						heal: 22,
-						jump: 16,
-						skill: {
-							lancet: 20,
-							tornado: 27
-						},
-						defend: 0,
-					}
+		"Lulu": {
+			name: "Lulu",
+			health: 140,
+			attack: 16,
+			imageUrl: "assets/images/luluSml.png",
+			enemyAttackBack: 15,
+			moveSet: {
+				attack: 18,
+				heal: 25,
+				jump: 16,
+				skill: {
+					lancet: 20,
+					tornado: 27
 				},
-		
+				defend: 0,
+			},
+			locked: false,
+		},
+
+		"Wol": {
+			name: "Wol",
+			health: 130,
+			attack: 18,
+			imageUrl: "assets/images/wolSml.png",
+			moveSet: {
+				attack: 18,
+				heal: 22,
+				jump: 16,
+				skill: {
+					lancet: 20,
+					tornado: 27
+				},
+				defend: 0,
+			},
+			locked: false,
+		},
+
+		// Unlockable character 
+		"Zulu": {
+			name: "Zulu",
+			health: 140,
+			attack: 16,
+			imageUrl: "assets/images/zulu.png",
+			enemyAttackBack: 15,
+			moveSet: {
+				attack: 18,
+				heal: 25,
+				jump: 16,
+				skill: {
+					lancet: 20,
+					tornado: 27
+				},
+				defend: 0,
+			},
+			locked: true,
+
+
+			//Saved for future use, unlockable character
+			/*if (character.name = "Zulu") {
+				$('<div class="character" data-name="Zulu">').style.display = "none";
+			//} else if ((character.name = "Zulu") && (killCount = 1)) {
+			//	$("<div class='character' data-name='Zulu'>").show();
+			};
+			console.log(killCount); */
+
+		},
+
 	};
 
 	var enemyCharacters = {
@@ -242,15 +280,12 @@ $(document).ready(function () {
 			imageUrl: "assets/images/diablo.gif",
 		},
 
-
 		"kefka": { // Pittsburgh
 			name: "Kefka",
-			health: 40,
+			health: 340,
 			attack: 35,
 			imageUrl: "assets/images/kefka.png",
 		},
-
-
 
 	};
 
@@ -260,7 +295,7 @@ $(document).ready(function () {
 	var growl = new Audio("assets/audio/growl.mp3");
 	var cursor = new Audio("assets/audio/cursor.mp3");
 	var battle1 = new Audio("assets/audio/battle1.mp3");
-	var boss1 = new Audio("assets/audio/boss1.mp3");
+	//var boss1 = new Audio("assets/audio/boss1.mp3");
 	var fanfare = new Audio("assets/audio/fanfare.mp3");
 	var enemyDeath = new Audio("assets/audio/enemyDeath.mp3");
 
@@ -277,8 +312,9 @@ $(document).ready(function () {
 	var currentEnemy;
 	var temperature;
 	var charHealth;
-	var battleMusic;
-	var isBoss;
+	var battleMusic = battle1;
+
+	//var isBoss = false;
 
 	//var combatTimer = setInterval(timer, speed);
 	//var currentChar = charObj;
@@ -286,13 +322,13 @@ $(document).ready(function () {
 
 
 	// Audio loops --------------------------------------------
-
-	if (isBoss = true) {
-		battleMusic = boss1;
-	} else {
-		battleMusic = battle1;
-	}
-
+	/*
+		if (isBoss = true) {
+			battleMusic = boss1;
+		} else {
+			battleMusic = battle1;
+		}
+	*/
 	battleMusic.addEventListener('ended', function () {
 		this.currentTime = 0;
 		this.play();
@@ -307,8 +343,6 @@ $(document).ready(function () {
 
 
 	//----------Functions-------------------------------------------
-
-
 
 	// designates which frame is shown on load
 	$("#game-start-screen").show();
@@ -327,6 +361,7 @@ $(document).ready(function () {
 		//var charHealth = $("<div class='character-health'>").text(character.health);
 		charDiv.append(charName).append(charImage); //.append(charHealth);
 		$(renderArea).append(charDiv);
+		
 	};
 
 
@@ -338,7 +373,7 @@ $(document).ready(function () {
 		var charImage = $("<img alt='image' class='character-image'>").attr("src", character.imageUrl);
 		charDiv /*.append(charName)*/ .append(charImage); //.append(charHealth);
 		$(renderArea).append(charDiv);
-		
+
 	};
 
 	// renders character moveSet to the DOM
@@ -373,53 +408,53 @@ $(document).ready(function () {
 
 		$(renderArea).append(heal1);
 
-/*
-		(attack1).click(function () {
-			setInterval(anim, 10);
-			function anim() {
+		/*
+				(attack1).click(function () {
+					setInterval(anim, 10);
+					function anim() {
 
-				var pos = 0;
-				console.log(pos);
-				var elem =  $("<img alt='image' class='character-image'>").attr("src", character.imageUrl);
-			pos + 80;
-			elem.style.left = pos + 'px'; 
-			}
-			//clearInterval(id);
-			console.log(pos);
-		}
-	)};
+						var pos = 0;
+						console.log(pos);
+						var elem =  $("<img alt='image' class='character-image'>").attr("src", character.imageUrl);
+					pos + 80;
+					elem.style.left = pos + 'px'; 
+					}
+					//clearInterval(id);
+					console.log(pos);
+				}
+			)};
 
-			$("<button>").click(function () {
-			$(charDiv).animate({ left: '250px' });
-		}); 
+					$("<button>").click(function () {
+					$(charDiv).animate({ left: '250px' });
+				}); 
 
-*/
+		*/
 
 
 
-		};
+	};
 
 	// New ability system -------------------------------------------------------------------------
-/*
-	function Skill(strength, name) {
-		this.strength = strength;
-		this.name = name;
-	}
+	/*
+		function Skill(strength, name) {
+			this.strength = strength;
+			this.name = name;
+		}
 
-	Skill.prototype.createBtn = function (parent) {
-		var btn = document.createElement('button');
-		input.id = this.name;
-		input.addEventListener ? input.addEventListener('click', this.getPrice.bind(this), false) :
-			input.attachEvent('onclick', this.getPrice.bind(this));
-		parent.appendChild(input);
-	};
-	// instantiate & append to body
-	var attack = new Skill(12, "Attack");
-	var poison = new Skill(12, "Poison");
-	x.createBtn(document.body);
+		Skill.prototype.createBtn = function (parent) {
+			var btn = document.createElement('button');
+			input.id = this.name;
+			input.addEventListener ? input.addEventListener('click', this.getPrice.bind(this), false) :
+				input.attachEvent('onclick', this.getPrice.bind(this));
+			parent.appendChild(input);
+		};
+		// instantiate & append to body
+		var attack = new Skill(12, "Attack");
+		var poison = new Skill(12, "Poison");
+		x.createBtn(document.body);
 
-	var btn = document.createElement("BUTTON");   
-	btn.innerHTML = "CLICK ME";      */
+		var btn = document.createElement("BUTTON");   
+		btn.innerHTML = "CLICK ME";      */
 	// ============================================================================================
 
 
@@ -433,6 +468,7 @@ $(document).ready(function () {
 		$(renderArea).append(charInfoMenu);
 		$(renderArea).append(charHealthMenu);
 		$(renderArea).append(charMaxHealthMenu);
+		
 	};
 
 	// updates selected character
@@ -464,8 +500,7 @@ $(document).ready(function () {
 			renderEnemy(enemyCharacters.kefka, "#enemy-section");
 			renderInfo(enemyCharacters.kefka, ".enemy-menu");
 			currentEnemy = enemyCharacters.kefka;
-			isBoss = true;
-
+			//isBoss = true;
 
 		} else if ((latitude == 41) && (longitude == -74)) {
 			renderEnemy(enemyCharacters.dragon, "#enemy-section");
@@ -477,7 +512,6 @@ $(document).ready(function () {
 			renderInfo(enemyCharacters.knight, ".enemy-menu");
 			currentEnemy = enemyCharacters.knight;
 
-			battleMusic = battle1;
 		}
 
 		return currentEnemy;
@@ -519,9 +553,10 @@ $(document).ready(function () {
 
 			Math.ceil(lat);
 			Math.ceil(lon);
-			console.log(lat);
+			
 			enemySelected = getEnemy(lat, lon);
 			console.log(lat);
+			console.log(lon);
 
 
 			console.log(enemySelected);
@@ -617,6 +652,9 @@ $(document).ready(function () {
 		} else {
 			startToggle = $("#game-start-screen").detach();
 			$("#character-select-screen").show("slow");
+
+			
+			
 		}
 	});
 
@@ -798,6 +836,7 @@ $(document).ready(function () {
 				$(".reset").show().on("click", function () {
 					location.reload();
 					fanfare.pause();
+
 				});
 			}, 2500);
 
@@ -806,11 +845,11 @@ $(document).ready(function () {
 
 			// If you have killed all of your opponents you win
 			// Call the restartGame function to allow the user to restart the game and play again
-			if (killCount >= enemyCharacters.length) {
-				clearMessage();
+			//if (killCount >= enemyCharacters.length) {
+			clearMessage();
 
 
-			}
+			//}
 		}
 
 
@@ -818,7 +857,5 @@ $(document).ready(function () {
 		//clearMessage();
 
 	});
-
-
 
 });
