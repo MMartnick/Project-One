@@ -1,137 +1,54 @@
-function battleUpdate() {
-
-    $(this).hide();;
-    setTimeout(function () {
-        $(this).show();
-    }, 10000);
-    setTimeout(battleUpdate, 13000);
-
-}
-
-setTimeout(battleUpdate, 3000);
-
-$(this).hide();
-$("#char-select").show();
-
-// renders character moveSet to the DOM
-var renderMoveSet = function (character, renderArea) {
-
-    $(this).hide();
-    setTimeout(function () {
-        $(this).show();
-    }, 10000);
-
-    var attack1 = $("<button>");
-    //class='combat-attack'  data-type='"+character+"'>");
-    attack1.addClass("combat-attack");
-    attack1.attr("data-type", character);
-    attack1.text(character);
-    // variable for testing to see that the character data renders a distinct button
-    var attackData = attack1.attr("data-type");
-    console.log(attackData);
-
-    $(renderArea).append(attack1);
-
-    // cure button render
-    var heal1 = $("<button>");
-    heal1.addClass("combat-heal");
-    heal1.attr("data-heal", character);
-    heal1.text("Cure");
-    // variable for testing to see that the character data renders a distinct button
-    var healData = heal1.attr("data-heal");
-    console.log(healData);
-
-    $(renderArea).append(heal1);
-
-    $(this).click(hide());
-
-    /*		moveSet: {
-            attack: 12,
-            heal: 26,
-            jump: 16,
-            skill: {
-                lancet: 20,
-                tornado: 27
-            },
-            defend: 0,
-        }
-    */
-};
+document.addEventListener("DOMContentLoaded", function () {
 
 
-// New rendering structure =================================================================================================================
+    function Character(first, last, health, attack, image) {
+        this.firstName = first;
+        this.lastName = last;
+        this.health = health;
+        this.attack = attack;
+        this.imageUrl = image;
+    }
 
-function Character(HP, MP, ATK, DEF, SPD, MND, INT, skills, imageUrl) {
+    // Create character objects
+    var cloud = new Character("Cloud", "Strife", 120, 16, "../images/cloudSml.png");
 
-}
+    var Character = cloud;
+
+    var charDiv = document.createElement("div").setAttribute("class", "character") /*.setAttribute("data-name", Character.firstName)*/ ;
+    //var charImage =  document.createElement("IMG").setAttribute("alt", "image").setAttribute("class", "character-image").setAttribute("src", Character.imageURL);
+
+    //function imgPop() {
+
+        var x = document.createElement("IMG");
+        x.setAttribute("src", Character.imageUrl.toString());
+        x.setAttribute("class", "character-image character");
+        x.setAttribute("alt", "image");
+        document.getElementById("character-select-screen").appendChild(x);
+    //};
+
+    charDiv;
+    
+    document.createElement("div").setAttribute("class", "character");
+    //document.getElementById("team-character-select").innerHTML = Character.imageUrl;
+    //document.getElementById("character-select-screen").innerHTML = imgPop();
+    //document.getElementById("team-character-select").innerHTML = charDiv+ " " + charImage+ "."; 
 
 
-// Character vairables
-var kain = new Character(142, 55, 12, 15, 4000, 4, 7, moveSet = (attack, heal, jump, lance), "assets/images/kainSml.png");
-
-// Skills
-
-var attack = $("<button>");
-//class='combat-attack'  data-type='"+Character+"'>");
-attack.addClass("combat-attack");
-attack.attr("data-type", Character);
-attack.text(Character);
-attack.value(10);
-// variable for testing to see that the Character data renders a distinct button
-var attackData = attack.attr("data-type");
-console.log(attackData);
-
-$(renderArea).append(attack);
 
 
-// cure button render
-var heal = $("<button>");
-heal.addClass("combat-heal");
-heal.attr("data-heal", Character);
-heal.text("Cure");
-heal.value(10 + Character.MND);
-// variable for testing to see that the Character data renders a distinct button
-var healData = heal.attr("data-heal");
-console.log(healData);
+    // renders all characters to the DOM
+    // function renderCharacter(character, renderArea) {
 
-$(renderArea).append(heal1);
+    // this block of code builds the character card, and renders it to the page.
 
-$(".moveset-container").on("click", ".combat-heal", function () {
-    var playerName = $(this).attr("data-heal");
-    console.log(playerName, "Yo");
-    // creates messages for our attack and our opponents counter attack
-    // var attackMessage = Characters[playerName].name + "gained" + Characters[playerName].moveSet.heal + " HP.";
-    var healUp = Character[playerName].moveSet.heal + Characters[playerName].health;
-    console.log(healUp);
-    //clearMessage();
+
+
+    //var charHealth = $("<div class='character-health'>").text(character.health);
+    //charDiv.appendChild(charImage); //.append(charHealth);
+    //};
+
+
+    //renderCharacter(Character, document.getElementById("team-character-select"));
+
+
 });
-
-// Reduce your attack health by the opponents attack value.
-Characters[playerName].health -= enemyAttackLevel;
-console.log(Characters[playerName]);
-console.log(Characters[playerName].health);
-
-var charHealth = $("<div class>").text(Characters[playerName].health);
-$(".Character-name-menu").append(charHealth);
-
-
-
-var jump = $("<button>");
-jump.addClass("combat-jump");
-jump.attr("data-jump", Character);
-jump.text("Jump");
-// variable for testing to see that the Character data renders a distinct button
-var jumpData = jump.attr("data-jump");
-console.log(jumpData);
-
-$(renderArea).append(jump);
-
-var lance = $("<button>");
-lance.addClass("combat-lance");
-lance.attr("data-lance", Character);
-lance.text("lance");
-// variable for testing to see that the Character data renders a distinct button
-var lanceData = lance.attr("data-lance");
-console.log(lanceData);
-
-$(renderArea).append(lance);
