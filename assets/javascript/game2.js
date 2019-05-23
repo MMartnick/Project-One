@@ -1,21 +1,34 @@
 document.addEventListener("DOMContentLoaded", function () {
 
 
-    var currentScreen = document.getElementById("character-select-screen");
+    var currentScreen = document.getElementById("team-character-select");
 
-    function Character(first, last, health, attack, image) {
+
+    // Character function =========================================================
+    function Character(first, last, health, strength, image) {
         this.firstName = first;
         this.lastName = last;
         this.health = health;
-        this.attack = attack;
+        this.strength = strength;
         this.imageUrl = image;
     }
 
+
+    
     // Create character objects
     var cloud = new Character("Cloud", "Strife", 120, 16, "../images/cloudSml.png");
+    var x = cloud;
+    var golbez = new Character("Golbez", "Harvey", 142, 18, "../images/golbezSml.png");
+    var y = golbez;
+    var lulu = new Character("Lulu", null, 140, 15, "../images/luluSml.png");
+    var z = lulu;
     
-    var Character = cloud;
+    // Array of characters
+    var charList = [x, y, z ]; 
 
+    //==============================================================================
+
+    // Renders character objects to the DOM - builds character card
     var renderCharacter = function (Character, renderArea) {
 
         var charDiv = document.createElement("DIV");
@@ -37,28 +50,13 @@ document.addEventListener("DOMContentLoaded", function () {
         renderArea.appendChild(charDiv);
     };
 
-    renderCharacter(Character, currentScreen);
-    
+    //==============================================================================
+    //==renderCharacter(Character, currentScreen);
+
+
+    // Loops through charList to populate the character select screen 
+    for (i = 0; i < charList.length; i++) {
+        renderCharacter(charList[i], currentScreen);
+    }
+    //==============================================================================
 });
-
-//document.createElement("DIV").createAttribute("class", "new");
-//document.getElementById("team-character-select").innerHTML = Character.imageUrl;
-//document.getElementById("character-select-screen").innerHTML = imgPop();
-//document.getElementById("team-character-select").innerHTML = charDiv+ " " + charImage+ "."; 
-
-
-
-
-// renders all characters to the DOM
-// function renderCharacter(character, renderArea) {
-
-// this block of code builds the character card, and renders it to the page.
-
-
-
-//var charHealth = $("<div class='character-health'>").text(character.health);
-//charDiv.appendChild(charImage); //.append(charHealth);
-//};
-
-
-//renderCharacter(Character, document.getElementById("team-character-select"));
