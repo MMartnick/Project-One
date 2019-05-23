@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         charDiv.setAttribute("data-name", Character.firstName);
         renderArea.appendChild(charDiv);
 
-        var charName = document.createElement("P");
+        var charName = document.createElement("DIV");
         charName.innerText = Character.firstName;
         charName.setAttribute("class", "character-name");
         charDiv.appendChild(charName);
